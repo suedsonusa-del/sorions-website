@@ -20,7 +20,7 @@ export default function Navbar({ currentPage, setCurrentPage, locale, setLocale,
           {/* Elegant vector logo mark */}
           <svg className="brand-logo" viewBox="0 0 100 100" width="32" height="32" fill="none">
             <rect width="100" height="100" rx="20" fill="transparent" />
-            <path d="M 35 30 C 45 20, 65 20, 65 35 C 65 45, 35 45, 35 65 C 35 80, 55 80, 65 70" 
+            <path d="M 65 30 C 55 20, 35 20, 35 35 C 35 45, 65 45, 65 65 C 65 80, 45 80, 35 70" 
                   stroke="#C8B89A" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="brand-name">SORIONS<span>.</span></span>
