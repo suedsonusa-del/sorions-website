@@ -1,13 +1,15 @@
-export default function Home({ homeTexts, servicesList, setCurrentPage }) {
+import { useNavigate } from 'react-router-dom';
+
+export default function Home({ homeTexts, servicesList }) {
+  const navigate = useNavigate();
+
   const handleCtaClick = () => {
-    setCurrentPage('contact');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/contato');
   };
 
   const handleComplianceClick = (e) => {
     e.preventDefault();
-    setCurrentPage('compliance');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/compliance');
   };
 
   // Pre-mapping of SVG icons for the 6 services
@@ -125,7 +127,7 @@ export default function Home({ homeTexts, servicesList, setCurrentPage }) {
         <h3 className="compliance-cta-title">{homeTexts.complianceTitle}</h3>
         <p className="compliance-cta-text">{homeTexts.complianceText}</p>
         <a href="#compliance" className="compliance-cta-btn" onClick={handleComplianceClick}>
-          {setCurrentPage ? 'Conformidade e Governança / Compliance & Governance' : ''}
+          Conformidade e Governança / Compliance & Governance
         </a>
       </section>
     </div>

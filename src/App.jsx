@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -8,14 +9,14 @@ import Compliance from './pages/Compliance';
 import Contact from './pages/Contact';
 import { translations } from './utils/translations';
 
-function App() {
-  const [locale, setLocale] = useState('pt');
-  const [currentPage, setCurrentPage] = useState('home');
+// Helper component to handle page title updates and scroll resets on navigation
+function RouteWrapper({ children, locale, pageKey }) {
+  const location = useLocation();
 
-  const t = translations[locale];
-
-  // Dynamically update document title and meta description tag for SEO
   useEffect(() => {
+    // Reset scroll to top
+    window.scrollTo({ top: 0 });
+
     // Page name titles mapping
     const titleMap = {
       pt: {
@@ -34,8 +35,8 @@ function App() {
       }
     };
 
-    // Update title
-    const pageTitle = titleMap[locale]?.[currentPage] || 'Sorions';
+    // Update document title
+    const pageTitle = titleMap[locale]?.[pageKey] || 'Sorions';
     document.title = `Sorions | ${pageTitle}`;
 
     // Update meta description
@@ -56,57 +57,90 @@ function App() {
 
     // Set html lang attribute
     document.documentElement.lang = locale === 'pt' ? 'pt-BR' : 'en';
-  }, [locale, currentPage]);
+  }, [locale, location.pathname, pageKey]);
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return (
-          <Home
-            homeTexts={t.home}
-            servicesList={t.services.list}
-            setCurrentPage={setCurrentPage}
-          />
-        );
-      case 'about':
-        return <About aboutTexts={t.about} />;
-      case 'services':
-        return <Services servicesTexts={t.services} servicesList={t.services.list} />;
-      case 'compliance':
-        return <Compliance complianceTexts={t.compliance} />;
-      case 'contact':
-        return <Contact contactTexts={t.contact} />;
-      default:
-        return (
-          <Home
-            homeTexts={t.home}
-            servicesList={t.services.list}
-            setCurrentPage={setCurrentPage}
-          />
-        );
-    }
-  };
+  return children;
+}
+
+function MainLayout() {
+  const [locale, setLocale] = useState('pt');
+  const t = translations[locale];
 
   return (
     <>
       <Navbar
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         locale={locale}
         setLocale={setLocale}
         navItems={t.nav}
       />
       
       <main>
-        {renderPage()}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RouteWrapper locale={locale} pageKey="home">
+                <Home homeTexts={t.home} servicesList={t.services.list} />
+              </RouteWrapper>
+            }
+          />
+          <Route
+            path="/sobre"
+            element={
+              <RouteWrapper locale={locale} pageKey="about">
+                <About aboutTexts={t.about} />
+              </RouteWrapper>
+            }
+          />
+          <Route
+            path="/servicos"
+            element={
+              <RouteWrapper locale={locale} pageKey="services">
+                <Services servicesTexts={t.services} servicesList={t.services.list} />
+              </RouteWrapper>
+            }
+          />
+          <Route
+            path="/compliance"
+            element={
+              <RouteWrapper locale={locale} pageKey="compliance">
+                <Compliance complianceTexts={t.compliance} />
+              </RouteWrapper>
+            }
+          />
+          <Route
+            path="/contato"
+            element={
+              <RouteWrapper locale={locale} pageKey="contact">
+                <Contact contactTexts={t.contact} />
+              </RouteWrapper>
+            }
+          />
+          {/* Catch-all fallback redirect to home */}
+          <Route
+            path="*"
+            element={
+              <RouteWrapper locale={locale} pageKey="home">
+                <Home homeTexts={t.home} servicesList={t.services.list} />
+              </RouteWrapper>
+            }
+          />
+        </Routes>
       </main>
 
       <Footer
-        setCurrentPage={setCurrentPage}
         navItems={t.nav}
         footerTexts={t.footer}
       />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <MainLayout />
+    </Router>
   );
 }
 

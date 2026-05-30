@@ -1,7 +1,12 @@
-export default function Footer({ setCurrentPage, navItems, footerTexts }) {
-  const handleNavClick = (page) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+import { Link } from 'react-router-dom';
+
+export default function Footer({ navItems, footerTexts }) {
+  const routeMap = {
+    home: '/',
+    about: '/sobre',
+    services: '/servicos',
+    compliance: '/compliance',
+    contact: '/contato'
   };
 
   return (
@@ -25,9 +30,9 @@ export default function Footer({ setCurrentPage, navItems, footerTexts }) {
             <ul className="footer-menu">
               {Object.entries(navItems).map(([key, label]) => (
                 <li key={key} className="footer-menu-item">
-                  <a href={`#${key}`} onClick={(e) => { e.preventDefault(); handleNavClick(key); }}>
+                  <Link to={routeMap[key]}>
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

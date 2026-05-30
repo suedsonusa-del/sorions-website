@@ -1,13 +1,27 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar({ currentPage, setCurrentPage, locale, setLocale, navItems }) {
+export default function Navbar({ locale, setLocale, navItems }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const handleNavClick = (page) => {
-    setCurrentPage(page);
-    setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const routeMap = {
+    home: '/',
+    about: '/sobre',
+    services: '/servicos',
+    compliance: '/compliance',
+    contact: '/contato'
   };
+
+  const pageMap = {
+    '/': 'home',
+    '/sobre': 'about',
+    '/servicos': 'services',
+    '/compliance': 'compliance',
+    '/contato': 'contact'
+  };
+
+  const activePage = pageMap[location.pathname] || 'home';
 
   const toggleLanguage = () => {
     setLocale(prev => (prev === 'pt' ? 'en' : 'pt'));
@@ -16,7 +30,7 @@ export default function Navbar({ currentPage, setCurrentPage, locale, setLocale,
   return (
     <nav className="navbar">
       <div className="container nav-container">
-        <a href="#home" className="brand-link" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
+        <Link to="/" className="brand-link" onClick={() => setMobileMenuOpen(false)}>
           {/* Elegant vector logo mark */}
           <svg className="brand-logo" viewBox="0 0 100 100" width="32" height="32" fill="none">
             <rect width="100" height="100" rx="20" fill="transparent" />
@@ -24,15 +38,15 @@ export default function Navbar({ currentPage, setCurrentPage, locale, setLocale,
                   stroke="#C8B89A" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="brand-name">SORIONS<span>.</span></span>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="nav-menu">
           {Object.entries(navItems).map(([key, label]) => (
-            <li key={key} className={`nav-item ${currentPage === key ? 'active' : ''}`}>
-              <a href={`#${key}`} onClick={(e) => { e.preventDefault(); handleNavClick(key); }}>
+            <li key={key} className={`nav-item ${activePage === key ? 'active' : ''}`}>
+              <Link to={routeMap[key]}>
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
           <li>
@@ -59,10 +73,10 @@ export default function Navbar({ currentPage, setCurrentPage, locale, setLocale,
       <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
         <ul className="mobile-nav-list">
           {Object.entries(navItems).map(([key, label]) => (
-            <li key={key} className={`mobile-nav-item ${currentPage === key ? 'active' : ''}`}>
-              <a href={`#${key}`} onClick={(e) => { e.preventDefault(); handleNavClick(key); }}>
+            <li key={key} className={`mobile-nav-item ${activePage === key ? 'active' : ''}`}>
+              <Link to={routeMap[key]} onClick={() => setMobileMenuOpen(false)}>
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
           <li style={{ marginTop: '1rem' }}>
