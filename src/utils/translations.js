@@ -62,6 +62,16 @@ export const translations = {
           id: "consulting",
           name: "Consultoria de Crescimento Digital",
           desc: "Orientação estratégica em aquisição, penetração de mercado e adequação às normas publicitárias."
+        },
+        {
+          id: "brandprotection",
+          name: "Proteção de Marca e Domínios",
+          desc: "Defesa de propriedade intelectual, monitoramento de abusos de marca e gestão de domínios corporativos."
+        },
+        {
+          id: "crosschannel",
+          name: "Estratégia Cross-Channel",
+          desc: "Abordagem multicanal integrada para otimizar jornadas de conversão e diluir riscos de canais únicos."
         }
       ]
     },
@@ -173,6 +183,16 @@ export const translations = {
           id: "consulting",
           name: "Digital Growth Consulting",
           desc: "Strategic guidance on acquisition, market penetration, and compliance with advertising standards."
+        },
+        {
+          id: "brandprotection",
+          name: "Brand & Domain Protection",
+          desc: "Intellectual property defense, brand abuse monitoring, and corporate domain registry management."
+        },
+        {
+          id: "crosschannel",
+          name: "Cross-Channel Acquisition Strategy",
+          desc: "Integrated multi-channel approach to optimize conversion journeys and mitigate single-channel risks."
         }
       ]
     },

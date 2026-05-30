@@ -61,6 +61,24 @@ export default function Home({ homeTexts, servicesList, setCurrentPage }) {
             <path d="M10 22h4" />
           </svg>
         );
+      case 'brandprotection':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="M12 8v8" />
+            <path d="M8 12h8" />
+          </svg>
+        );
+      case 'crosschannel':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <path d="m9 10.5 6-3.5" />
+            <path d="m9 13.5 6 3.5" />
+          </svg>
+        );
       default:
         return null;
     }
