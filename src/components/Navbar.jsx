@@ -51,8 +51,15 @@ export default function Navbar({ locale, setLocale, navItems }) {
           ))}
         </ul>
 
-        {/* Header Actions (Hamburger and Language Toggle) */}
+        {/* Header Actions (Language Toggle and Hamburger) */}
         <div className="nav-actions">
+          {/* Header Language Toggle - always visible */}
+          <button className="lang-toggle" onClick={toggleLanguage} aria-label="Toggle language">
+            <span className={locale === 'pt' ? 'active' : ''}>BR</span>
+            <span className="separator">|</span>
+            <span className={locale === 'en' ? 'active' : ''}>EN</span>
+          </button>
+
           {/* Hamburger Icon for Mobile */}
           <button 
             className="menu-toggle" 
@@ -61,13 +68,6 @@ export default function Navbar({ locale, setLocale, navItems }) {
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? '✕' : '☰'}
-          </button>
-
-          {/* Header Language Toggle - always visible */}
-          <button className="lang-toggle" onClick={toggleLanguage} aria-label="Toggle language">
-            <span className={locale === 'pt' ? 'active' : ''}>PT-BR</span>
-            <span className="separator">|</span>
-            <span className={locale === 'en' ? 'active' : ''}>EN</span>
           </button>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function Navbar({ locale, setLocale, navItems }) {
           ))}
           <li style={{ marginTop: '1rem' }}>
             <button className="lang-toggle" onClick={toggleLanguage} aria-label="Toggle language">
-              <span className={locale === 'pt' ? 'active' : ''}>PT-BR</span>
+              <span className={locale === 'pt' ? 'active' : ''}>BR</span>
               <span className="separator">|</span>
               <span className={locale === 'en' ? 'active' : ''}>EN</span>
             </button>
