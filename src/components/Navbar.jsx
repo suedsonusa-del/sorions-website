@@ -49,24 +49,27 @@ export default function Navbar({ locale, setLocale, navItems }) {
               </Link>
             </li>
           ))}
-          <li>
-            <button className="lang-toggle" onClick={toggleLanguage} aria-label="Toggle language">
-              <span className={locale === 'pt' ? 'active' : ''}>PT-BR</span>
-              <span className="separator">|</span>
-              <span className={locale === 'en' ? 'active' : ''}>EN</span>
-            </button>
-          </li>
         </ul>
 
-        {/* Hamburger Icon for Mobile */}
-        <button 
-          className="menu-toggle" 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-expanded={mobileMenuOpen}
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? '✕' : '☰'}
-        </button>
+        {/* Header Actions (Hamburger and Language Toggle) */}
+        <div className="nav-actions">
+          {/* Hamburger Icon for Mobile */}
+          <button 
+            className="menu-toggle" 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? '✕' : '☰'}
+          </button>
+
+          {/* Header Language Toggle - always visible */}
+          <button className="lang-toggle" onClick={toggleLanguage} aria-label="Toggle language">
+            <span className={locale === 'pt' ? 'active' : ''}>PT-BR</span>
+            <span className="separator">|</span>
+            <span className={locale === 'en' ? 'active' : ''}>EN</span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}

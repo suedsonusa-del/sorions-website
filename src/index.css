@@ -130,6 +130,14 @@ main {
   align-items: center;
   list-style: none;
   gap: 2.25rem;
+  margin-left: auto;
+  margin-right: 2.25rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nav-item a {
